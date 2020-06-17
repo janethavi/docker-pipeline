@@ -1,0 +1,88 @@
+{
+  "profiles": [
+    {
+      "name": "wso2am",
+      "product": "wso2am",
+      "versions": [
+        {
+          "product_version": "2.6.0",
+          "docker_release_version": "2.6.0.9",
+          "latest": false
+        },
+        {
+          "product_version": "3.0.0",
+          "docker_release_version": "3.0.0.3",
+          "latest": false
+        },
+        {
+          "product_version": "3.1.0",
+          "docker_release_version": "3.1.0.3",
+          "latest": true
+        }
+      ]
+    },
+    {
+      "name": "wso2am-analytics-dashboard",
+      "product": "wso2am-analytics",
+      "versions": [
+        {
+          "product_version": "2.6.0",
+          "docker_release_version": "2.6.0.9",
+          "latest": false
+        },
+        {
+          "product_version": "3.0.0",
+          "docker_release_version": "3.0.0.3",
+          "latest": false
+        },
+        {
+          "product_version": "3.1.0",
+          "docker_release_version": "3.1.0.1",
+          "latest": true
+        }
+      ]
+    },
+    {
+      "name": "wso2am-analytics-worker",
+      "product": "wso2am-analytics",
+      "versions": [
+        {
+          "product_version": "2.6.0",
+          "docker_release_version": "2.6.0.9",
+          "latest": false
+        },
+        {
+          "product_version": "3.0.0",
+          "docker_release_version": "3.0.0.3",
+          "latest": false
+        },
+        {
+          "product_version": "3.1.0",
+          "docker_release_version": "3.1.0.1",
+          "latest": true
+        }
+      ]
+    },
+    {
+      "name": "wso2is-km",
+      "product": "wso2is-km",
+      "versions": [
+        {
+          "product_version": "5.7.0",
+          "docker_release_version": "2.6.0.9",
+          "latest": false
+        },
+        {
+          "product_version": "5.9.0",
+          "docker_release_version": "3.0.0.3",
+          "latest": false
+        },
+        {
+          "product_version": "5.10.0",
+          "docker_release_version": "3.1.0.1",
+          "latest": true
+        }
+      ]
+    }
+  ]
+}
