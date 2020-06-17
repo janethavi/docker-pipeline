@@ -1,7 +1,9 @@
 def build_jobs = [:]
 
 pipeline {
-    agent any
+    agent {
+        label 'Jenkins-AWS01'
+    }
     environment {
         PATH = "/usr/local/wum/bin:$PATH"
     }
