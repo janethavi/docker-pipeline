@@ -16,7 +16,7 @@ def get_product_docker_home(wso2_product) {
 }
 
 def get_docker_release_version(wso2_product, wso2_product_version) {
-    config_file_location = "${WORKSPACE}/docker-pipeline/conf/conf/apim-data.json"
+    config_file_location = "${WORKSPACE}/conf/apim-data.json"
     config_file = readJSON file: config_file_location
     def result = config_file.profiles.find{ it.product == wso2_product }?.versions?.find{ it.product_version == wso2_product_version }
     DOCKER_RESOURCES_GIT_RELEASE_TAG = result.docker_release_version
