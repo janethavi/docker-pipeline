@@ -22,7 +22,7 @@
 
 readonly wso2_product_name=$1
 readonly wso2_product_version=$2
-readonly wso2_product_host_location="${HOME}/products"
+readonly wso2_product_host_location="${WORKSPACE}/product-packs"
 readonly WUM_HOME="${HOME}/.wum3"
 product_pack_name=""
 
