@@ -12,14 +12,14 @@ pipeline {
             steps{
                 withCredentials([usernamePassword(credentialsId: 'WUM', passwordVariable: 'WUM_PASSWORD', usernameVariable: 'WUM_USERNAME')]) {
                     sh 'wum init -u $WUM_USERNAME -p $WUM_PASSWORD'
-                    sh '/home/janeth/Documents/Project/docker-pipeline/update-pack/wum_update.sh $wso2_product $wso2_product_version'
+                    sh '${WORKSPACE}/docker-pipeline/scripts/wum-update.sh $wso2_product $wso2_product_version'
                 }
             }
         }
         stage('Build and Push') {
             steps{
                 script {
-                    build_script = load '/home/janeth/Documents/Project/docker-pipeline/apim-job/build-image.groovy'
+                    build_script = load '${WORKSPACE}/docker-pipeline/groovy-scripts/apim-build-image.groovy'
                     build_script.get_product_docker_home(wso2_product)
                     build_script.get_docker_release_version(wso2_product, wso2_product_version)
                     os_platforms = [alpine: '3.10', ubuntu: '18.04', centos: '7']
