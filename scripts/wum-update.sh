@@ -36,10 +36,12 @@ readonly WUM=`which wum`
 
 function download_apim_product() {
     echo "Adding ${wso2_product_name}-${wso2_product_version}"
-    wum add ${wso2_product_name}-${wso2_product_version}
+    wum add ${wso2_product_name}-${wso2_product_version} -y &
+    local pid=$!
+    wait $pid
     echo "Updating ${wso2_product_name}-${wso2_product_version}"
     wum update ${wso2_product_name}-${wso2_product_version} full &
-    local pid=$!
+    pid=$!
     wait $pid
 }
 
