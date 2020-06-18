@@ -16,7 +16,7 @@ def get_product_docker_home(wso2_product) {
 }
 
 def get_docker_release_version(wso2_product, wso2_product_version) {
-    config_file_location = "/home/janeth/Documents/Project/docker-pipeline/apim-job/conf/data.json"
+    config_file_location = "${WORKSPACE}/docker-pipeline/conf/conf/apim-data.json"
     config_file = readJSON file: config_file_location
     def result = config_file.profiles.find{ it.product == wso2_product }?.versions?.find{ it.product_version == wso2_product_version }
     DOCKER_RESOURCES_GIT_RELEASE_TAG = result.docker_release_version
@@ -24,7 +24,7 @@ def get_docker_release_version(wso2_product, wso2_product_version) {
 }
 
 def get_latest_wum_timestamp(wso2_product_profile, wso2_product_version) {
-    UPDATED_PRODUCT_PACK_LOCATION = "/home/janeth/products"
+    UPDATED_PRODUCT_PACK_LOCATION = "${WORKSPACE}/product-packs"
     wum_timestamp_command = "ls ${UPDATED_PRODUCT_PACK_LOCATION} | grep -e '${wso2_product_profile}-${wso2_product_version}.*full.zip' | cut -d'+' -f2 | cut -d'.' -f1 | tr -d '\n'"
     def wum_timestamp = ['bash', '-c', wum_timestamp_command].execute().text
     return wum_timestamp
