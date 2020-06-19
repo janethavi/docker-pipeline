@@ -24,7 +24,7 @@ def call() {
                     script {
                         // build_script = load 'groovy-scripts/apim-build-image.groovy'
                         build_script = new APIMUtils()
-                        build_script.get_product_docker_home(wso2_product)
+                        product_profile_docker_homes = build_script.get_product_docker_home(wso2_product)
                         build_script.get_docker_release_version(wso2_product, wso2_product_version)
                         os_platforms = [alpine: '3.10', ubuntu: '18.04', centos: '7']
                         for (os_platform_name in  os_platforms.keySet()) {

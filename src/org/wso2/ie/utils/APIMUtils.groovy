@@ -17,7 +17,7 @@
 * under the License.
 *
 */
-package org.wso2.ie.utils 
+package org.wso2.ie.utils
 
 def get_product_docker_home(wso2_product) {
     println "get_product_docker_home"
