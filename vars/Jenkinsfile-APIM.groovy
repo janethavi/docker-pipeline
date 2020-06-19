@@ -27,6 +27,7 @@ def call() {
                         product_profile_docker_homes = build_script.get_product_docker_home(wso2_product)
                         build_script.get_docker_release_version(wso2_product, wso2_product_version, product_profile_docker_homes)
                         os_platforms = [alpine: '3.10', ubuntu: '18.04', centos: '7']
+                        print ("Before for os")
                         for (os_platform_name in  os_platforms.keySet()) {
                             for (product_profile_docker_home in product_profile_docker_homes) {
                                 build_jobs["${os_platform_name}-${product_profile_docker_home}"] = create_build_job(wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home)
