@@ -19,6 +19,9 @@
 */
 package org.wso2.ie.utils
 
+def DOCKER_RESOURCES_GIT_RELEASE_TAG
+def latest_version
+
 def get_product_docker_home(wso2_product) {
     println "get_product_docker_home"
     switch(wso2_product) {
