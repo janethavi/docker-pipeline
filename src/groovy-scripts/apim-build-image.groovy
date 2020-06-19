@@ -17,6 +17,7 @@
 * under the License.
 *
 */
+package groovy-scripts 
 
 def get_product_docker_home(wso2_product) {
     switch(wso2_product) {
