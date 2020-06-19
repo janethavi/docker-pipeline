@@ -20,9 +20,11 @@
 package org.wso2.ie.utils 
 
 def get_product_docker_home(wso2_product) {
+    println "get_product_docker_home"
     switch(wso2_product) {
         case "wso2am":
             product_profile_docker_homes = ["apim"]
+            print ("docker-home-set")
             break
         case "wso2am-analytics":
             product_profile_docker_homes = ["apim-analytics/dashboard", "apim-analytics/worker"]
@@ -34,10 +36,12 @@ def get_product_docker_home(wso2_product) {
             println "Product is not valid"
             break
     }
+    return product_profile_docker_homes
 }
 
 def get_docker_release_version(wso2_product, wso2_product_version) {
-    config_file_location = "${WORKSPACE}/conf/apim-data.json"
+    println "get_docker_release_version"
+    config_file_location = "conf/apim-data.json"
     config_file = readJSON file: config_file_location
     def result = config_file.profiles.find{ it.product == wso2_product }?.versions?.find{ it.product_version == wso2_product_version }
     DOCKER_RESOURCES_GIT_RELEASE_TAG = result.docker_release_version
