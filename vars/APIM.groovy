@@ -6,7 +6,6 @@ def call() {
     pipeline {
         agent {
             label 'AWS01'
-            customWorkspace '${JENKINS_HOME}/workspace/wum-docker-builds/docker-apim/custom-workspace'
         }
         environment {
             PATH = "/usr/local/wum/bin:$PATH"
@@ -38,6 +37,11 @@ def call() {
                         parallel build_jobs
                     }
                 }
+            }
+        }
+        post { 
+            always { 
+                cleanWs()
             }
         }
     }
