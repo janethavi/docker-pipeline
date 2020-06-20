@@ -6,7 +6,7 @@ def call() {
     pipeline {
         agent {
             label 'AWS01'
-            customWorkspace "${JENKINS_HOME}/workspace/${JOB_NAME}/${BUILD_NUMBER}"
+            customWorkspace '${JENKINS_HOME}/workspace/${JOB_NAME}/${BUILD_NUMBER}'
         }
         environment {
             PATH = "/usr/local/wum/bin:$PATH"
