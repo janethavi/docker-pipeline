@@ -101,5 +101,5 @@ download_apim_product
 get_product_pack_name
 get_product_packs
 clean_up
-copy_pack_to_destination
-host_products
+#copy_pack_to_destination
+#host_products
