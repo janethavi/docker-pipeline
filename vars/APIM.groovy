@@ -5,8 +5,10 @@ def call() {
     def build_jobs = [:]
     pipeline {
         agent {
-            label 'AWS01'
-            customWorkspace '${JENKINS_HOME}/workspace/${JOB_NAME}/${BUILD_NUMBER}'
+            node {
+                label 'AWS01'
+                customWorkspace "{JENKINS_HOME}/workspace/${JOB_NAME}/${BUILD_NUMBER}"
+            }
         }
         environment {
             PATH = "/usr/local/wum/bin:$PATH"
