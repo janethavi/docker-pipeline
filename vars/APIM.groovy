@@ -41,7 +41,7 @@ def call() {
         }
         post { 
             always { 
-                cleanWs()
+                deleteDir()
             }
         }
     }
