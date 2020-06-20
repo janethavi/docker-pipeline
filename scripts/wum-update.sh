@@ -32,6 +32,7 @@ readonly AWK=`which awk`
 readonly GREP=`which grep`
 readonly ECHO=`which echo`
 readonly TEST=`which test`
+readonly REMOVE=`which rm`
 readonly WUM=`which wum`
 
 function download_apim_product() {
@@ -61,13 +62,44 @@ function copy_pack_to_destination() {
     ${TEST} -f ${product_pack_path} && ${TEST} -d ${wso2_product_host_location} && ${COPY} ${product_pack_path} ${wso2_product_host_location}
 }
 
+function get_product_packs() {
+    # obtain the currently available WSO2 product packs for a particular product based on the WUM channel
+    local product_packs=$(${WUM} list 2> /dev/null | ${AWK} '{print $3}' | ${GREP} -e "${wso2_product}.*full.zip")
+
+    wso2_product_packs=()
+    for product_pack in ${product_packs}; do
+        wso2_product_packs+=("${product_pack}")
+    done
+}
+
+function clean_up() {
+    # remove unnecessary product packs
+    local removable_packs=("${wso2_product_packs[@]:0:${#wso2_product_packs[@]}-1}")
+    echo ${wso2_product_packs[@]}
+    for pack in ${removable_packs[@]}
+    do
+    if ! ${WUM} delete -f ${pack}; then
+        echo "Failed to remove the WUM based product pack ${pack}. Exiting !"
+    else
+        echo "WUM based product pack ${pack} is deleted !"
+    fi
+    done
+    # clean the existing product pack folder
+    echo "Cleaning Hosting pack directory"
+    ${TEST} -d ${wso2_product_host_location} && ${REMOVE} -r ${wso2_product_host_location}/*
+}
+
 function host_products(){
     echo "Hosting product pack in localhost:8888"
-    cd ${wso2_product_host_location}
-    python3 -m http.server 8888 > python-server.log 2>&1 &  
+    pushd ${wso2_product_host_location};
+    python -m SimpleHTTPServer 8888 &
+    sleep 5
+    popd
 }
 
 download_apim_product
 get_product_pack_name
+get_product_packs
+clean_up
 copy_pack_to_destination
 host_products
