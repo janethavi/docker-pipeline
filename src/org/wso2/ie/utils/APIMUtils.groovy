@@ -45,8 +45,10 @@ def get_product_docker_home(wso2_product) {
 def get_docker_release_version(wso2_product, wso2_product_version) {
     println "get_docker_release_version"
     print "${WORKSPACE}"
-    config_file_location = "resources/org/wso2/ie/conf/apim-data.json"
-    config_file = readJSON file: config_file_location
+    wum_update_script = libraryResource 'org/wso2/ie/conf/apim-data.json'
+    writeFile file: './apim-data.json', text: wum_update_script
+    //config_file_location = "resources/org/wso2/ie/conf/apim-data.json"
+    config_file = readJSON file: 'apim-data.json'
     def result = config_file.profiles.find{ it.product == wso2_product }?.versions?.find{ it.product_version == wso2_product_version }
     DOCKER_RESOURCES_GIT_RELEASE_TAG = result.docker_release_version
     latest_version = result.latest
