@@ -6,7 +6,7 @@ def call() {
     pipeline {
         agent {
             node {
-                label 'master'
+                label 'AWS01'
                 customWorkspace "${JENKINS_HOME}/workspace/${JOB_NAME}/${BUILD_NUMBER}"
             }
         }
