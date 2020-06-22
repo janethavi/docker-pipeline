@@ -101,6 +101,6 @@ function host_products(){
 download_apim_product
 get_product_pack_name
 get_product_packs
-clean_up
 copy_pack_to_destination
+clean_up
 host_products
