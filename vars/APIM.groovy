@@ -13,7 +13,6 @@ def call() {
         }
         stages {
             stage('Download_product_packs') {
-                agent { label 'AWS01' }
                 steps{
                     withCredentials([usernamePassword(credentialsId: 'docker-image-build', passwordVariable: 'WUM_PASSWORD', usernameVariable: 'WUM_USERNAME')]) {
                         sh 'wum init -u $WUM_USERNAME -p $WUM_PASSWORD'
