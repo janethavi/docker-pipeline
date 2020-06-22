@@ -18,6 +18,7 @@
 *
 */
 package org.wso2.ie.utils
+import groovy.io.FileType
 
 def DOCKER_RESOURCES_GIT_RELEASE_TAG
 def latest_version
@@ -59,12 +60,22 @@ def get_latest_wum_timestamp(wso2_product_profile, wso2_product_version) {
     println "${WORKSPACE}"
     UPDATED_PRODUCT_PACK_LOCATION = "${WORKSPACE}/product-packs"
     println (UPDATED_PRODUCT_PACK_LOCATION)
+    def list = []
     //wum_timestamp_command = "ls ${UPDATED_PRODUCT_PACK_LOCATION} | grep -e '${wso2_product_profile}-${wso2_product_version}.*full.zip' | cut -d'+' -f2 | cut -d'.' -f1 | tr -d '\n'"
     // wum_timestamp_command = "ls ${WORKSPACE}"
     // println (wum_timestamp_command)
     // def wum_timestamp = ['bash', '-c', wum_timestamp_command].execute().text
     // print (['bash', '-c', wum_timestamp_command].execute().err.text)
     // println (wum_timestamp)
+    def dir = new File("${WORKSPACE}")
+        dir.eachFileRecurse (FileType.FILES) { file ->
+        list << file
+    }
+
+    list.each {
+        println it.path
+    }
+
     wum_timestamp = "1592585275036"
     return wum_timestamp
 }
