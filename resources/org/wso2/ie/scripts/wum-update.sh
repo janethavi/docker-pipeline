@@ -51,6 +51,11 @@ function copy_pack_to_destination() {
     local wum_product_home="${WUM_HOME}/products/${wso2_product_name}/${wso2_product_version}"
     local product_pack_path="${wum_product_home}/full/${product_pack_name}"
 
+    echo "----------"
+    ls ${wum_product_home}
+    ls ${product_pack_path}
+    echo "----------"
+
     # clean the existing product pack folder
     echo "Cleaning Hosting pack directory"
     ${TEST} -d ${wso2_product_host_location} && ${REMOVE} -r ${wso2_product_host_location}/*
