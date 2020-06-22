@@ -92,7 +92,7 @@ function clean_up() {
 function host_products(){
     echo "Hosting product pack in localhost:8888"
     pushd ${wso2_product_host_location};
-    python3 -m SimpleHTTPServer 8888 &
+    python3 -m http.server 8888 &
     sleep 5
     popd
     curl http://localhost:8888/
@@ -101,6 +101,6 @@ function host_products(){
 download_apim_product
 get_product_pack_name
 get_product_packs
-copy_pack_to_destination
 clean_up
+copy_pack_to_destination
 host_products
