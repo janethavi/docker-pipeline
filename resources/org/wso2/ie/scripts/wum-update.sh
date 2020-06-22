@@ -24,7 +24,7 @@ readonly wso2_product_name=$1
 readonly wso2_product_version=$2
 readonly wso2_product_host_location="${WORKSPACE}/product-packs"
 readonly WUM_HOME="${HOME}/.wum3"
-readonly properties_file_name="timestamp.txt"
+readonly properties_file_name="timestamp.properties"
 product_pack_name=""
 
 # capture the location of executables of command line utility tools used for the WSO2 product update process
