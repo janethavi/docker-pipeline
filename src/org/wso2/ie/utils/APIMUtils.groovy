@@ -61,9 +61,10 @@ def get_latest_wum_timestamp(wso2_product_profile, wso2_product_version) {
     UPDATED_PRODUCT_PACK_LOCATION = "${WORKSPACE}/product-packs"
     println (UPDATED_PRODUCT_PACK_LOCATION)
     unstash : 'properties'
-    def timestampfile = readFile "timestamp.txt"
+    def timestampfile =  readProperties file "timestamp.txt"
     println (timestampfile)
-    def wum_timestamp = timestampfile.wum_timestamp
+    def wum_timestamp =  props['wum_timestamp']
+
     println "timestamp --------"
     println $wum_timestamp
     println "--------"
