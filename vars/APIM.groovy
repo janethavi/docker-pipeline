@@ -24,6 +24,7 @@ def call() {
                         sh 'ls'
                         sh 'chmod +x ${WORKSPACE}/wum-update.sh'
                         sh '${WORKSPACE}/wum-update.sh $wso2_product $wso2_product_version'
+                        stash includes: 'product-packs/*', name: 'wum_pack'
                     }
                 }
             }
@@ -31,6 +32,9 @@ def call() {
                 agent { label 'AWS01' }
                 steps{
                     script {
+                        dir('${WORKSPACE}/product-packs'){
+                            unstash 'wum_pack'
+                        }
                         // build_script = load 'groovy-scripts/apim-build-image.groovy'
                         sh 'ls ${WORKSPACE}'
                         build_script = new APIMUtils()
