@@ -56,8 +56,10 @@ def get_docker_release_version(wso2_product, wso2_product_version) {
 
 def get_latest_wum_timestamp(wso2_product_profile, wso2_product_version) {
     println "running get_latest_wum_timestamp"
+    println "${WORKSPACE}"
     UPDATED_PRODUCT_PACK_LOCATION = "${WORKSPACE}/product-packs"
     println (UPDATED_PRODUCT_PACK_LOCATION)
+    //wum_timestamp_command = "ls ${UPDATED_PRODUCT_PACK_LOCATION} | grep -e '${wso2_product_profile}-${wso2_product_version}.*full.zip' | cut -d'+' -f2 | cut -d'.' -f1 | tr -d '\n'"
     wum_timestamp_command = "ls ${WORKSPACE}"
     println (wum_timestamp_command)
     def wum_timestamp = ['bash', '-c', wum_timestamp_command].execute().text
