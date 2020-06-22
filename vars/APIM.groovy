@@ -19,7 +19,9 @@ def call() {
                     withCredentials([usernamePassword(credentialsId: 'docker-image-build', passwordVariable: 'WUM_PASSWORD', usernameVariable: 'WUM_USERNAME')]) {
                         sh 'wum init -u $WUM_USERNAME -p $WUM_PASSWORD'
                         //sh '${WORKSPACE}/scripts/wum-update.sh $wso2_product $wso2_product_version'
-                        
+                        wum_update_script = libraryResource 'vars/scripts/wum-update.sh'
+                        writeFile file: './wum-update.sh', text: wum_update_script
+                        sh 'wum-update.sh $wso2_product $wso2_product_version'
                     }
                 }
             }
