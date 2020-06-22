@@ -31,6 +31,7 @@ def call() {
                 steps{
                     script {
                         // build_script = load 'groovy-scripts/apim-build-image.groovy'
+                        sh 'ls ${WORKSPACE}'
                         build_script = new APIMUtils()
                         product_profile_docker_homes = build_script.get_product_docker_home(wso2_product)
                         build_script.get_docker_release_version(wso2_product, wso2_product_version)
