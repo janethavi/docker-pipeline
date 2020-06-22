@@ -46,16 +46,14 @@ function download_apim_product() {
     wait $pid
 }
 
-function get_product_pack_name() {
-  # obtain the currently available WSO2 product packs for a particular product based on the WUM channel
-  product_pack_name=$(${WUM} list 2> /dev/null | ${AWK} '{print $3}' | ${GREP} -e "${wso2_product_name}.*full\.zip")
-}
-
 function copy_pack_to_destination() {
     local make_directory=$(which mkdir)
-    local wso2_product="${wso2_product_name}-${wso2_product_version}"
     local wum_product_home="${WUM_HOME}/products/${wso2_product_name}/${wso2_product_version}"
     local product_pack_path="${wum_product_home}/full/${product_pack_name}"
+
+    # clean the existing product pack folder
+    echo "Cleaning Hosting pack directory"
+    ${TEST} -d ${wso2_product_host_location} && ${REMOVE} -r ${wso2_product_host_location}/*
 
     echo "Coping ${wso2_product} to $wso2_product_host_location"
     [[ ${make_directory} ]] && ${TEST} ! -d ${wso2_product_host_location} && ${make_directory} ${wso2_product_host_location}
@@ -64,7 +62,8 @@ function copy_pack_to_destination() {
 
 function get_product_packs() {
     # obtain the currently available WSO2 product packs for a particular product based on the WUM channel
-    local product_packs=$(${WUM} list 2> /dev/null | ${AWK} '{print $3}' | ${GREP} -e "${wso2_product}.*full.zip")
+    product_pack_name="${wso2_product_name}-${wso2_product_version}"
+    product_packs=$(${WUM} list 2> /dev/null | ${AWK} '{print $3}' | ${GREP} -e "${product_pack_name}.*full\.zip")
 
     wso2_product_packs=()
     for product_pack in ${product_packs}; do
@@ -84,9 +83,6 @@ function clean_up() {
         echo "WUM based product pack ${pack} is deleted !"
     fi
     done
-    # clean the existing product pack folder
-    echo "Cleaning Hosting pack directory"
-    ${TEST} -d ${wso2_product_host_location} && ${REMOVE} -r ${wso2_product_host_location}/*
 }
 
 function host_products(){
@@ -99,7 +95,6 @@ function host_products(){
 }
 
 download_apim_product
-get_product_pack_name
 get_product_packs
 copy_pack_to_destination
 clean_up
