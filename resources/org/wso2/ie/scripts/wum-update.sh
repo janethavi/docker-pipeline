@@ -24,6 +24,7 @@ readonly wso2_product_name=$1
 readonly wso2_product_version=$2
 readonly wso2_product_host_location="${WORKSPACE}/product-packs"
 readonly WUM_HOME="${HOME}/.wum3"
+readonly properties_file_name="timestamp.txt"
 product_pack_name=""
 
 # capture the location of executables of command line utility tools used for the WSO2 product update process
@@ -91,6 +92,17 @@ function clean_up() {
     done
 }
 
+function write_config_file(){
+    echo "Writing timestamp to properties file"
+    echo "loc"
+    ls ${wso2_product_host_location}
+    echo "grep"
+    ls ${wso2_product_host_location} | grep -e '${wso2_product_name}-${wso2_product_version}.*full.zip'
+    local timestamp=$(ls ${wso2_product_host_location} | grep -e '${wso2_product_name}-${wso2_product_version}.*full.zip' | cut -d'+' -f2 | cut -d'.' -f1 | tr -d '\n')
+    local string_value="Product-Timestamp=${timestamp}"
+    echo ${string_value} > $properties_file_name
+}
+
 function host_products(){
     echo "Hosting product pack in localhost:8888"
     pushd ${wso2_product_host_location}
@@ -104,6 +116,7 @@ download_apim_product
 get_product_packs
 copy_pack_to_destination
 clean_up
+write_config_file
 host_products
 
 echo "LS dir"
