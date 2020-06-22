@@ -24,6 +24,7 @@ def call() {
                         wum_update_script = libraryResource 'org/wso2/ie/scripts/wum-update.sh'
                         writeFile file: './wum-update.sh', text: wum_update_script
                         sh 'ls'
+                        sh 'chmod +x ${WORKSPACE}/wum-update.sh'
                         sh '${WORKSPACE}/wum-update.sh $wso2_product $wso2_product_version'
                     }
                 }
