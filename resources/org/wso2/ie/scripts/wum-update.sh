@@ -35,6 +35,7 @@ readonly ECHO=`which echo`
 readonly TEST=`which test`
 readonly REMOVE=`which rm`
 readonly WUM=`which wum`
+readonly CUT=`which cut`
 
 function download_apim_product() {
     echo "Adding ${wso2_product_name}-${wso2_product_version}"
