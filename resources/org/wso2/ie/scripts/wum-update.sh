@@ -49,7 +49,8 @@ function download_apim_product() {
 function copy_pack_to_destination() {
     local make_directory=$(which mkdir)
     local wum_product_home="${WUM_HOME}/products/${wso2_product_name}/${wso2_product_version}"
-    local product_pack_path="${wum_product_home}/full/${product_pack_name}"
+    local pack_name_with_timestamp=$(ls ${wum_product_home}/full |  ${GREP} -e "${product_pack_name}.*full\.zip" )
+    local product_pack_path="${wum_product_home}/full/${pack_name_with_timestamp}"
 
     echo "----------"
     ls ${wum_product_home}
