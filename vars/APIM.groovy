@@ -31,9 +31,7 @@ def call() {
             stage('Build and Push') {
                 steps{
                     script {
-                        dir('${WORKSPACE}/product-packs'){
-                            unstash 'wum_pack'
-                        }
+                        unstash 'wum_pack'
                         // build_script = load 'groovy-scripts/apim-build-image.groovy'
                         sh 'ls ${WORKSPACE}'
                         build_script = new APIMUtils()
