@@ -60,7 +60,7 @@ def get_latest_wum_timestamp(wso2_product_profile, wso2_product_version) {
     UPDATED_PRODUCT_PACK_LOCATION = "${WORKSPACE}/product-packs"
     println (UPDATED_PRODUCT_PACK_LOCATION)
     //wum_timestamp_command = "ls ${UPDATED_PRODUCT_PACK_LOCATION} | grep -e '${wso2_product_profile}-${wso2_product_version}.*full.zip' | cut -d'+' -f2 | cut -d'.' -f1 | tr -d '\n'"
-    wum_timestamp_command = "ls"
+    wum_timestamp_command = "ls ${WORKSPACE}"
     println (wum_timestamp_command)
     def wum_timestamp = ['bash', '-c', wum_timestamp_command].execute().text
     print (['bash', '-c', wum_timestamp_command].execute().err.text)
