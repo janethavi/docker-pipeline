@@ -71,10 +71,11 @@ def get_latest_wum_timestamp(wso2_product_profile, wso2_product_version) {
         dir.eachFileRecurse (FileType.FILES) { file ->
         list << file
     }
-
+    println "------------- filenames"
     list.each {
         println it.path
     }
+    println "----------------"
 
     wum_timestamp = "1592585275036"
     return wum_timestamp
