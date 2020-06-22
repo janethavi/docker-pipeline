@@ -32,7 +32,7 @@ def call() {
                 agent { label 'AWS01' }
                 steps{
                     script {
-                        unstash 'properties'
+                        // unstash 'properties'
                         // build_script = load 'groovy-scripts/apim-build-image.groovy'
                         sh 'ls'
                         build_script = new APIMUtils()

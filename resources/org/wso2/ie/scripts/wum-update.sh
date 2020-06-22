@@ -101,7 +101,7 @@ function write_config_file(){
     ls ${wso2_product_host_location} | grep -e '${wso2_product_name}-${wso2_product_version}.*full.zip'
     local timestamp=$(ls ${wso2_product_host_location} | ${GREP} -e "${wso2_product_name}-${wso2_product_version}.*full.zip" | ${CUT} -d'+' -f2 | ${CUT} -d'.' -f1)
     echo $timestamp
-    local string_value="Product-Timestamp=${timestamp}"
+    local string_value="wum_timestamp=${timestamp}"
     echo ${string_value} > $properties_file_name
 }
 
