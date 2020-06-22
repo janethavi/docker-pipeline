@@ -24,7 +24,7 @@ def call() {
                         sh 'ls'
                         sh 'chmod +x ${WORKSPACE}/wum-update.sh'
                         sh '${WORKSPACE}/wum-update.sh $wso2_product $wso2_product_version'
-                        stash includes: 'product-packs/*', name: 'wum_pack'
+                        stash includes: 'timestamp.txt', name: 'properties'
                     }
                 }
             }
@@ -32,9 +32,9 @@ def call() {
                 agent { label 'AWS01' }
                 steps{
                     script {
-                        unstash 'wum_pack'
+                        unstash 'properties'
                         // build_script = load 'groovy-scripts/apim-build-image.groovy'
-                        sh 'ls ${WORKSPACE}'
+                        sh 'ls'
                         build_script = new APIMUtils()
                         product_profile_docker_homes = build_script.get_product_docker_home(wso2_product)
                         build_script.get_docker_release_version(wso2_product, wso2_product_version)
