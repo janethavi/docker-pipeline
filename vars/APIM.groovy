@@ -24,7 +24,7 @@ def call() {
                         sh 'ls'
                         sh 'chmod +x ${WORKSPACE}/wum-update.sh'
                         sh '${WORKSPACE}/wum-update.sh $wso2_product $wso2_product_version'
-                        stash includes: 'timestamp.txt', name: 'properties'
+                        stash includes: 'timestamp.properties', name: 'properties'
                     }
                 }
             }
