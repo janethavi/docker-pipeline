@@ -67,7 +67,7 @@ def get_latest_wum_timestamp(wso2_product_profile, wso2_product_version) {
     // def wum_timestamp = ['bash', '-c', wum_timestamp_command].execute().text
     // print (['bash', '-c', wum_timestamp_command].execute().err.text)
     // println (wum_timestamp)
-    def dir = new File("${WORKSPACE}")
+    def dir = new File("${WORKSPACE}/product-packs")
         dir.eachFileRecurse (FileType.FILES) { file ->
         list << file
     }
