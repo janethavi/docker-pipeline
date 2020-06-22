@@ -31,6 +31,7 @@ def call() {
             stage('Build and Push') {
                 steps{
                     script {
+                        agent { label 'AWS01'}
                         unstash 'wum_pack'
                         // build_script = load 'groovy-scripts/apim-build-image.groovy'
                         sh 'ls ${WORKSPACE}'
