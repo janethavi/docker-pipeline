@@ -58,6 +58,8 @@ function copy_pack_to_destination() {
     echo "Coping ${wso2_product} to $wso2_product_host_location"
     [[ ${make_directory} ]] && ${TEST} ! -d ${wso2_product_host_location} && ${make_directory} ${wso2_product_host_location}
     ${TEST} -f ${product_pack_path} && ${TEST} -d ${wso2_product_host_location} && ${COPY} ${product_pack_path} ${wso2_product_host_location}
+    echo "LS dir"
+    ls ${wso2_product_host_location}
 }
 
 function get_product_packs() {
