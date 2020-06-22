@@ -63,7 +63,7 @@ def get_latest_wum_timestamp(wso2_product_profile, wso2_product_version) {
     unstash : 'properties'
     def timestampfile = readFile "timestamp.txt"
     println (timestampfile)
-    def wum_timestamp = timestampfile.wum_timestamp
+    def wum_timestamp = "${timestampfile.split("=")[1]}"
     println "timestamp --------"
     println $wum_timestamp
     println "--------"
