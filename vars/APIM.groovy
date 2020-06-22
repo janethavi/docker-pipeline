@@ -29,7 +29,6 @@ def call() {
                 }
             }
             stage('Build and Push') {
-                agent { label 'AWS01' }
                 steps{
                     script {
                         dir('${WORKSPACE}/product-packs'){
