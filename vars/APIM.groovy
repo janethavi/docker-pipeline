@@ -44,7 +44,7 @@ def call() {
                                 print(product_profile_docker_home)
                                 print(os_platform_name)
                                 print(os_platforms[os_platform_name])
-                                build_jobs["${os_platform_name}-${product_profile_docker_home}"] = create_build_job(build_script, wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home)
+                                build_jobs["${os_platform_name}-${product_profile_docker_home}"] = create_build_job(build_script, wso2_product, wso2_product_version, os_platform_name, os_platforms[os_platform_name], product_profile_docker_home)
                             }
                         }
                         parallel build_jobs
@@ -55,11 +55,11 @@ def call() {
     }
 }
 
-def create_build_job(build_script, wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home) {
+def create_build_job(build_script, wso2_product, wso2_product_version, os_platform_name, os_platform_version, product_profile_docker_home) {
     return {
         stage("${os_platform_name}-${product_profile_docker_home}"){
             stage("Build ${os_platform_name}-${product_profile_docker_home}") {
-                def image_map = build_script.image_build_handler(wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home)
+                def image_map = build_script.image_build_handler(wso2_product, wso2_product_version, os_platform_name, os_platform_version, product_profile_docker_home)
                 stage("Push ${os_platform_name}-${product_profile_docker_home}") {
                     build_script.push_images(image_map)
                 }

@@ -91,12 +91,13 @@ def build_image(wso2_product, wso2_product_version, os_platform_name, product_pr
     return image
 }
 
-def generate_tags(wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home, wum_timestamp) {
+def generate_tags(wso2_product, wso2_product_version, os_platform_name, os_platform_version, product_profile_docker_home, wum_timestamp) {
     println("Generating tags...")
     def image_tags = []
     println "INFO"
     println (os_platform_name)
     println (product_profile_docker_home)
+    println (os_platform_version)
     if (latest_version) {
         image_tags.add("latest")
     }
@@ -104,7 +105,7 @@ def generate_tags(wso2_product, wso2_product_version, os_platform_name, product_
     def stable_version_tag = wso2_product_version
     // add OS platform name
     if (os_platform_name != "ubuntu") {
-        stable_version_tag ="${stable_version_tag}-${os_platform_name}${os_platforms[os_platform_name]}"
+        stable_version_tag ="${stable_version_tag}-${os_platform_name}${os_platform_version}"
     }
     image_tags.add(stable_version_tag)
     
@@ -115,17 +116,17 @@ def generate_tags(wso2_product, wso2_product_version, os_platform_name, product_
     
     // add OS platform name
     if (os_platform_name != "ubuntu"){
-        unique_tag = "${unique_tag}-${os_platform_name}${os_platforms[os_platform_name]}"
+        unique_tag = "${unique_tag}-${os_platform_name}${os_platform_version}"
     }
     image_tags.add(unique_tag)
 
     return image_tags
 }
 
-def image_build_handler(wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home) {
+def image_build_handler(wso2_product, wso2_product_version, os_platform_name, os_platform_version, product_profile_docker_home) {
     def image_map = [:]
     def wum_timestamp = get_latest_wum_timestamp(wso2_product, wso2_product_version)
-    def image_tags = generate_tags(wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home, wum_timestamp)
+    def image_tags = generate_tags(wso2_product, wso2_product_version, os_platform_name, os_platform_version, product_profile_docker_home, wum_timestamp)
     for (def image_tag = 0; image_tag <image_tags.size(); image_tag++){
         println(image_tags[image_tag])
     }
