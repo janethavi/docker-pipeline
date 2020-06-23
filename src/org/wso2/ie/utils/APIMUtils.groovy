@@ -46,7 +46,7 @@ def get_docker_release_version(wso2_product, wso2_product_version) {
     println "Getting Docker Release Version..."
     wum_update_script = libraryResource 'org/wso2/ie/conf/apim-data.json'
     writeFile file: './apim-data.json', text: wum_update_script
-    config_file = readJSON file: 'apim-data.json'
+    def config_file = readJSON file: 'apim-data.json'
     def result = config_file.profiles.find{ it.product == wso2_product }?.versions?.find{ it.product_version == wso2_product_version }
     DOCKER_RESOURCES_GIT_RELEASE_TAG = result.docker_release_version
     latest_version = result.latest
@@ -68,6 +68,7 @@ def build_image(wso2_product, wso2_product_version, os_platform_name, product_pr
     UPDATED_PRODUCT_PACK_HOST_LOCATION_URL = "http://172.17.0.1:8888"
     PRIVATE_DOCKER_REGISTRY = "localhost:5000"
     
+    def config_file = readJSON file: 'apim-data.json'
     def result = config_file.profiles.find{ it.product_profile_docker_home == product_profile_docker_home }
     def profile = result.name
     def image_prefix = "${PRIVATE_DOCKER_REGISTRY}/${profile}"
