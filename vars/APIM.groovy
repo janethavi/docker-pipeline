@@ -6,7 +6,6 @@ def call() {
     pipeline {
         agent {
             label 'AWS01'
-            //customWorkspace "${JENKINS_HOME}/workspace/${JOB_NAME}/${BUILD_NUMBER}"
         }
         environment {
             PATH = "/usr/local/wum/bin:$PATH"
@@ -18,10 +17,8 @@ def call() {
                         sh 'wum init -u $WUM_USERNAME -p $WUM_PASSWORD'
                     }
                     script{
-                        //sh '${WORKSPACE}/scripts/wum-update.sh $wso2_product $wso2_product_version'
                         wum_update_script = libraryResource 'org/wso2/ie/scripts/wum-update.sh'
                         writeFile file: './wum-update.sh', text: wum_update_script
-                        sh 'ls'
                         sh 'chmod +x ${WORKSPACE}/wum-update.sh'
                         sh '${WORKSPACE}/wum-update.sh $wso2_product $wso2_product_version'
                         stash includes: 'timestamp.properties', name: 'properties'
@@ -29,21 +26,14 @@ def call() {
                 }
             }
             stage('Build and Push') {
-                agent { label 'AWS01' }
                 steps{
                     script {
-                        // unstash 'properties'
-                        // build_script = load 'groovy-scripts/apim-build-image.groovy'
-                        sh 'ls'
                         build_script = new APIMUtils()
                         product_profile_docker_homes = build_script.get_product_docker_home(wso2_product)
                         build_script.get_docker_release_version(wso2_product, wso2_product_version)
                         os_platforms = [alpine: '3.10', ubuntu: '18.04', centos: '7']
                         for (os_platform_name in  os_platforms.keySet()) {
                             for (product_profile_docker_home in product_profile_docker_homes) {
-                                print(product_profile_docker_home)
-                                print(os_platform_name)
-                                print(os_platforms[os_platform_name])
                                 build_jobs["${os_platform_name}-${product_profile_docker_home}"] = create_build_job(build_script, wso2_product, wso2_product_version, os_platform_name, os_platforms[os_platform_name], product_profile_docker_home)
                             }
                         }
