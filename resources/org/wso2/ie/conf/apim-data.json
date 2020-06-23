@@ -3,7 +3,7 @@
     {
       "name": "wso2am",
       "product": "wso2am",
-      "product_profile_docker_home": "wso2am",
+      "product_profile_docker_home": "apim",
       "versions": [
         {
           "product_version": "2.6.0",
