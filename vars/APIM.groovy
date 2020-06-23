@@ -43,6 +43,7 @@ def call() {
                             for (product_profile_docker_home in product_profile_docker_homes) {
                                 print(product_profile_docker_home)
                                 print(os_platform_name)
+                                print(os_platforms[os_platform_name])
                                 build_jobs["${os_platform_name}-${product_profile_docker_home}"] = create_build_job(build_script, wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home)
                             }
                         }

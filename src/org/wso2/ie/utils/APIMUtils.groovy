@@ -18,7 +18,6 @@
 *
 */
 package org.wso2.ie.utils
-import groovy.io.FileType
 
 def DOCKER_RESOURCES_GIT_RELEASE_TAG
 def latest_version
@@ -95,7 +94,9 @@ def build_image(wso2_product, wso2_product_version, os_platform_name, product_pr
 def generate_tags(wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home, wum_timestamp) {
     println("Generating tags...")
     def image_tags = []
-    
+    println "INFO"
+    println (os_platform_name)
+    println (product_profile_docker_home)
     if (latest_version) {
         image_tags.add("latest")
     }
