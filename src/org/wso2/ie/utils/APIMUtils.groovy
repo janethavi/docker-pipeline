@@ -79,11 +79,13 @@ def build_image(wso2_product, wso2_product_version, os_platform_name, product_pr
     UPDATED_PRODUCT_PACK_HOST_LOCATION_URL = "http://172.17.0.1:8888"
     PRIVATE_DOCKER_REGISTRY = "localhost:5000"
     
-    profile = wso2_product
-    if (product_profile_docker_home.contains("analytics")) {
-        def result = config_file.profiles.find{ it.product == wso2_product }
-        profile = result.name
-    }
+    // profile = wso2_product
+    // if (product_profile_docker_home.contains("analytics")) {
+    //     def result = config_file.profiles.find{ it.product == wso2_product }
+    //     profile = result.name
+    // }
+    def result = config_file.profiles.find{ it.product_profile_docker_home == product_profile_docker_home }
+    def profile = result.name
     def image_prefix = "${PRIVATE_DOCKER_REGISTRY}/${profile}"
 
     def docker_build_context = "https://github.com/wso2/${DOCKER_RESOURCE_GIT_REPO_NAME}.git#v${DOCKER_RESOURCES_GIT_RELEASE_TAG}:/dockerfiles/${os_platform_name}/${product_profile_docker_home}"
