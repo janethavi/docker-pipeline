@@ -1,0 +1,65 @@
+{
+    "profiles": [
+        {
+            "name": "wso2is",
+            "product": "wso2is",
+            "product_profile_docker_home": "is",
+            "versions": [
+                {
+                    "product_version": "5.7.0",
+                    "docker_release_version": "5.7.0.3",
+                    "latest": false
+                },
+                {
+                    "product_version": "5.8.0",
+                    "docker_release_version": "5.8.0.5",
+                    "latest": false
+                },
+                {
+                    "product_version": "5.9.0",
+                    "docker_release_version": "5.9.0.3",
+                    "latest": false
+                },
+                {
+                    "product_version": "5.10.0",
+                    "docker_release_version": "5.10.0.1",
+                    "latest": true
+                }
+            ]
+        },
+        {
+            "name": "wso2is-analytics-dashboard",
+            "product": "wso2is-analytics",
+            "product_profile_docker_home": "is-analytics/dashboard",
+            "versions": [
+                {
+                    "product_version": "5.7.0",
+                    "docker_release_version": "5.7.0.3",
+                    "latest": false
+                },
+                {
+                    "product_version": "5.8.0",
+                    "docker_release_version": "5.8.0.4",
+                    "latest": true
+                }
+            ]
+        },
+        {
+            "name": "wso2is-analytics-worker",
+            "product": "wso2is-analytics",
+            "product_profile_docker_home": "is-analytics/worker",
+            "versions": [
+                {
+                    "product_version": "5.7.0",
+                    "docker_release_version": "5.7.0.3",
+                    "latest": false
+                },
+                {
+                    "product_version": "5.8.0",
+                    "docker_release_version": "5.8.0.4",
+                    "latest": true
+                }
+            ]
+        }
+    ]
+}

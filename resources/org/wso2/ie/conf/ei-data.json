@@ -1,0 +1,101 @@
+{
+    "profiles": [
+        {
+            "name": "wso2ei-analytics-dashboard",
+            "product": "wso2ei",
+            "product_profile_docker_home": "analytics/dashboard",
+            "versions": [
+                {
+                    "product_version": "6.5.0",
+                    "docker_release_version": "6.5.0.4",
+                    "latest": false
+                },
+                {
+                    "product_version": "6.6.0",
+                    "docker_release_version": "6.6.0.2",
+                    "latest": true
+                }
+            ]
+        },
+        {
+            "name": "wso2ei-analytics-worker",
+            "product": "wso2ei",
+            "product_profile_docker_home": "analytics/worker",
+            "versions": [
+                {
+                    "product_version": "6.5.0",
+                    "docker_release_version": "6.5.0.4",
+                    "latest": false
+                },
+                {
+                    "product_version": "6.6.0",
+                    "docker_release_version": "6.6.0.2",
+                    "latest": true
+                }
+            ]
+        },
+        {
+            "name": "wso2ei-broker",
+            "product": "wso2ei",
+            "product_profile_docker_home": "broker",
+            "versions": [
+                {
+                    "product_version": "6.5.0",
+                    "docker_release_version": "6.5.0.4",
+                    "latest": false
+                },
+                {
+                    "product_version": "6.6.0",
+                    "docker_release_version": "6.6.0.2",
+                    "latest": true
+                }
+            ]
+        },
+        {
+            "name": "wso2ei-business-process",
+            "product": "wso2ei",
+            "product_profile_docker_home": "business-process",
+            "versions": [
+                {
+                    "product_version": "6.5.0",
+                    "docker_release_version": "6.5.0.4",
+                    "latest": false
+                },
+                {
+                    "product_version": "6.6.0",
+                    "docker_release_version": "6.6.0.2",
+                    "latest": true
+                }
+            ]
+        },
+        {
+            "name": "wso2ei-integrator",
+            "product": "wso2ei",
+            "product_profile_docker_home": "integrator",
+            "versions": [
+                {
+                    "product_version": "6.5.0",
+                    "docker_release_version": "6.5.0.4",
+                    "latest": false
+                },
+                {
+                    "product_version": "6.6.0",
+                    "docker_release_version": "6.6.0.2",
+                    "latest": true
+                }
+            ]
+        },
+        {
+            "name": "wso2ei-msf4j",
+            "product": "wso2ei",
+            "product_profile_docker_home": "msf4j",
+            "versions": [
+                {
+                    "product_version": "6.5.0",
+                    "docker_release_version": "6.5.0.4",
+                    "latest": true
+                }
+            ]
+        }
+    ]
+}
