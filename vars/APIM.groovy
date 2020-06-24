@@ -1,7 +1,7 @@
 import org.wso2.ie.utils.APIMUtils
 
 
-def call() {
+def call(var1) {
     def build_jobs = [:]
     pipeline {
         agent {
@@ -18,6 +18,7 @@ def call() {
                         sh 'wum init -u $WUM_USERNAME -p $WUM_PASSWORD'
                     }
                     script{
+                        println(var1)
                         wum_update_script = libraryResource 'org/wso2/ie/scripts/wum-update.sh'
                         writeFile file: './wum-update.sh', text: wum_update_script
                         sh 'chmod +x ${WORKSPACE}/wum-update.sh'
