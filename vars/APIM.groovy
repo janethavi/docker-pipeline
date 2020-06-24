@@ -9,6 +9,7 @@ def call() {
         }
         environment {
             PATH = "/usr/local/wum/bin:$PATH"
+            EMAIL_TO = 'janeth@wso2.com'
         }
         stages {
             stage('Download_product_packs') {
@@ -40,6 +41,21 @@ def call() {
                         parallel build_jobs
                     }
                 }
+            }
+        }
+        post {
+            always {
+                script{
+                    cleanup_script = libraryResource 'org/wso2/ie/scripts/cleanup.sh'
+                    writeFile file: './cleanup.sh', text: cleanup_script
+                    sh 'chmod +x ${WORKSPACE}/cleanup.sh'
+                    sh '${WORKSPACE}/cleanup.sh $wso2_product $wso2_product_version'
+                }
+            }
+            failure {
+                emailext body: 'Check console output at $BUILD_URL to view the results. \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+                to: "${EMAIL_TO}",
+                subject: 'Build failed in Docker Image Build Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
             }
         }
     }
