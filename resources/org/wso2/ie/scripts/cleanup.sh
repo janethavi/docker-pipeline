@@ -33,13 +33,13 @@ readonly TEST=`which test`
 readonly REMOVE=`which rm`
 readonly WUM=`which wum`
 
+wso2_product=""
 declare -a product_packs
 
 function get_product_packs() {
-    # obtain the currently available WSO2 product packs for a particular product based on the WUM channel
-    local product_pack_name="${wso2_product_name}-${wso2_product_version}"
-    product_packs=$(${WUM} list 2> /dev/null | ${AWK} '{print $3}' | ${GREP} -e "${product_pack_name}.*full\.zip")
-    echo "Product packs found: ${product_packs[@]}"
+   wso2_product=${wso2_product_name}-${wso2_product_version}
+   ls ${wso2_product_host_location}
+   product_packs=$(ls ${wso2_product_host_location} | ${GREP} -e "${wso2_product}.*full.zip")
 }
 
 function clean_product_pack_dir() {
