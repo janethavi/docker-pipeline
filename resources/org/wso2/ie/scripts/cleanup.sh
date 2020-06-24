@@ -39,6 +39,7 @@ function get_product_packs() {
     # obtain the currently available WSO2 product packs for a particular product based on the WUM channel
     local product_pack_name="${wso2_product_name}-${wso2_product_version}"
     product_packs=$(${WUM} list 2> /dev/null | ${AWK} '{print $3}' | ${GREP} -e "${product_pack_name}.*full\.zip")
+    echo "Product packs found: ${product_packs[@]}"
 }
 
 function clean_product_pack_dir() {
@@ -48,3 +49,6 @@ function clean_product_pack_dir() {
         ${TEST} -d ${wso2_product_host_location} && ${REMOVE} -r ${wso2_product_host_location}/${product_pack}
     done
 }
+
+get_product_packs
+clean_product_pack_dir
