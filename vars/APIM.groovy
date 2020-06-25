@@ -1,7 +1,7 @@
 import org.wso2.ie.utils.APIMUtils
 
 
-def call(var1) {
+def call(product_key) {
     def build_jobs = [:]
     pipeline {
         agent {
@@ -18,7 +18,6 @@ def call(var1) {
                         sh 'wum init -u $WUM_USERNAME -p $WUM_PASSWORD'
                     }
                     script{
-                        println(var1)
                         wum_update_script = libraryResource 'org/wso2/ie/scripts/wum-update.sh'
                         writeFile file: './wum-update.sh', text: wum_update_script
                         sh 'chmod +x ${WORKSPACE}/wum-update.sh'
@@ -30,7 +29,7 @@ def call(var1) {
             stage('Build and Push') {
                 steps{
                     script {
-                        build_script = new APIMUtils()
+                        build_script = new APIMUtils(product_key)
                         product_profile_docker_homes = build_script.get_product_docker_home(wso2_product)
                         build_script.get_docker_release_version(wso2_product, wso2_product_version)
                         os_platforms = [alpine: '3.10', ubuntu: '18.04', centos: '7']
