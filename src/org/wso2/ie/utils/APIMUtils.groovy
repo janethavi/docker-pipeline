@@ -22,13 +22,8 @@ package org.wso2.ie.utils
 def DOCKER_RESOURCES_GIT_RELEASE_TAG
 def latest_version
 
-class APIMUtils {
-
-String product_key
-
 def get_product_docker_home(wso2_product) {
     println "Getting product Docker Homes..."
-    def product_profile_docker_homes
     switch(wso2_product) {
         case "wso2am":
             product_profile_docker_homes = ["apim"]
@@ -49,14 +44,9 @@ def get_product_docker_home(wso2_product) {
 
 def get_docker_release_version(wso2_product, wso2_product_version) {
     println "Getting Docker Release Version..."
-    String loc = "org/wso2/ie/conf/apim-data.json"
-    String wum_update_script = libraryResource(loc)
+    wum_update_script = libraryResource 'org/wso2/ie/conf/apim-data.json'
     writeFile file: './apim-data.json', text: wum_update_script
     config_file = readJSON file: 'apim-data.json'
-    // println("---------")
-    def file = new File(getClass().getResource('resource/org/wso2/ie/conf/apim-data.json'))
-    writeFile file: './apim-data.json', text: wum_update_script
-    println(this.product_key)
     def result = config_file.profiles.find{ it.product == wso2_product }?.versions?.find{ it.product_version == wso2_product_version }
     DOCKER_RESOURCES_GIT_RELEASE_TAG = result.docker_release_version
     latest_version = result.latest
