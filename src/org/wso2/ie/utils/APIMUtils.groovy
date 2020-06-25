@@ -42,6 +42,9 @@ def get_product_docker_home(wso2_product) {
         case "wso2is-analytics":
             product_profile_docker_homes = ["is-analytics/dashboard", "is-analytics/worker"]
             break
+        case "wso2ei":
+            product_profile_docker_homes = ["analytics/dashboard", "analytics/worker", "broker", "business-process", "integrator", "msf4j"]
+            break
         default:
             println "Product is not valid"
             break
