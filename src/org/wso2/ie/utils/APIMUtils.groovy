@@ -21,6 +21,7 @@ package org.wso2.ie.utils
 
 def DOCKER_RESOURCES_GIT_RELEASE_TAG
 def latest_version
+def DOCKER_RESOURCE_GIT_REPO_NAME
 
 def get_product_docker_home(wso2_product) {
     println "Getting product Docker Homes..."
@@ -35,6 +36,12 @@ def get_product_docker_home(wso2_product) {
         case "wso2is-km":
             product_profile_docker_homes = ["is-as-km"]
             break
+        case "wso2is":
+            product_profile_docker_homes = ["is"]
+            break
+        case "wso2is-analytics":
+            product_profile_docker_homes = ["is-analytics/dashboard", "is-analytics/worker"]
+            break
         default:
             println "Product is not valid"
             break
@@ -43,11 +50,11 @@ def get_product_docker_home(wso2_product) {
     return product_profile_docker_homes
 }
 
-def get_docker_release_version(wso2_product, wso2_product_version) {
+def get_docker_release_version(wso2_product, wso2_product_version, product_key) {
     println "Getting Docker Release Version..."
-    wum_update_script = libraryResource 'org/wso2/ie/conf/apim-data.json'
-    writeFile file: './apim-data.json', text: wum_update_script
-    config_file = readJSON file: 'apim-data.json'
+    wum_update_script = libraryResource "org/wso2/ie/conf/${product_key}-data.json"
+    writeFile file: "./${product_key}-data.json", text: wum_update_script
+    config_file = readJSON file: "${product_key}-data.json"
     def result = config_file.profiles.find{ it.product == wso2_product }?.versions?.find{ it.product_version == wso2_product_version }
     DOCKER_RESOURCES_GIT_RELEASE_TAG = result.docker_release_version
     latest_version = result.latest
@@ -63,9 +70,9 @@ def get_latest_wum_timestamp(wso2_product_profile, wso2_product_version) {
     return wum_timestamp
 }
 
-def build_image(wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home, wum_timestamp, image_tags) {
+def build_image(wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home, wum_timestamp, image_tags, product_key) {
     println "Building image..."
-    DOCKER_RESOURCE_GIT_REPO_NAME = "docker-apim"
+    DOCKER_RESOURCE_GIT_REPO_NAME = "docker-${product_key}"
     UPDATED_PRODUCT_PACK_HOST_LOCATION_URL = "http://172.17.0.1:8888"
     PRIVATE_DOCKER_REGISTRY = "localhost:5000"
     
@@ -108,7 +115,7 @@ def generate_tags(wso2_product, wso2_product_version, os_platform_name, os_platf
     return image_tags
 }
 
-def image_build_handler(wso2_product, wso2_product_version, os_platform_name, os_platform_version, product_profile_docker_home) {
+def image_build_handler(wso2_product, wso2_product_version, os_platform_name, os_platform_version, product_profile_docker_home, product_key) {
     def image_map = [:]
     def wum_timestamp = get_latest_wum_timestamp(wso2_product, wso2_product_version)
     def image_tags = generate_tags(wso2_product, wso2_product_version, os_platform_name, os_platform_version, product_profile_docker_home, wum_timestamp)
@@ -117,7 +124,7 @@ def image_build_handler(wso2_product, wso2_product_version, os_platform_name, os
         println(image_tags[image_tag])
     }
     
-    def image = build_image(wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home, wum_timestamp, image_tags)
+    def image = build_image(wso2_product, wso2_product_version, os_platform_name, product_profile_docker_home, wum_timestamp, image_tags, product_key)
     image_map.put(image, image_tags)
     tag_images(image, image_tags)
     
