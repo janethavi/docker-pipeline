@@ -18,18 +18,9 @@
 *
 */
 package org.wso2.ie.utils
-import org.jenkinsci.plugins.workflow.libs.*;
 
-
-class APIMUtils {
-
-String product_key
-String DOCKER_RESOURCES_GIT_RELEASE_TAG
-String latest_version
-
-APIMUtils(String product_key){
-    this.product_key = product_key
-}
+def DOCKER_RESOURCES_GIT_RELEASE_TAG
+def latest_version
 
 def get_product_docker_home(wso2_product) {
     println "Getting product Docker Homes..."
@@ -54,10 +45,10 @@ def get_product_docker_home(wso2_product) {
 
 def get_docker_release_version(wso2_product, wso2_product_version) {
     println "Getting Docker Release Version..."
-    // String loc = "org/wso2/ie/conf/apim-data.json"
-    // String wum_update_script = libraryResource(loc)
-    // writeFile file: './apim-data.json', text: wum_update_script
-    // config_file = readJSON file: 'apim-data.json'
+    String loc = "org/wso2/ie/conf/apim-data.json"
+    String wum_update_script = libraryResource(loc)
+    writeFile file: './apim-data.json', text: wum_update_script
+    config_file = readJSON file: 'apim-data.json'
     // println("---------")
     def file = new File(getClass().getResource('resource/org/wso2/ie/conf/apim-data.json'))
     writeFile file: './apim-data.json', text: wum_update_script
@@ -149,9 +140,6 @@ def push_images(image_map) {
     println "Pushing tagged images..."
     image_map.collectMany { image, image_name -> image_name.collect { [object: image, param: it] } }
     .each { println it.object.push(it.param) }
-}
-
-
 }
 
 

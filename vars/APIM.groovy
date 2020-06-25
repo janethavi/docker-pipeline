@@ -29,7 +29,7 @@ def call(product_key) {
             stage('Build and Push') {
                 steps{
                     script {
-                        build_script = new APIMUtils(product_key)
+                        build_script = new APIMUtils()
                         product_profile_docker_homes = build_script.get_product_docker_home(wso2_product)
                         build_script.get_docker_release_version(wso2_product, wso2_product_version)
                         os_platforms = [alpine: '3.10', ubuntu: '18.04', centos: '7']
