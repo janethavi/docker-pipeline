@@ -19,8 +19,12 @@
 */
 package org.wso2.ie.utils
 
-def DOCKER_RESOURCES_GIT_RELEASE_TAG
-def latest_version
+
+class APIMUtils {
+
+String product_key
+String DOCKER_RESOURCES_GIT_RELEASE_TAG
+String latest_version
 
 def get_product_docker_home(wso2_product) {
     println "Getting product Docker Homes..."
