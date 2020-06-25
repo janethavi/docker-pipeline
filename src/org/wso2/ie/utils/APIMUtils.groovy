@@ -18,6 +18,7 @@
 *
 */
 package org.wso2.ie.utils
+import org.jenkinsci.plugins.workflow.libs.*;
 
 
 class APIMUtils {
@@ -53,7 +54,8 @@ def get_product_docker_home(wso2_product) {
 
 def get_docker_release_version(wso2_product, wso2_product_version) {
     println "Getting Docker Release Version..."
-    def wum_update_script = libraryResource 'org/wso2/ie/conf/apim-data.json'
+    String loc = "org/wso2/ie/conf/apim-data.json"
+    def wum_update_script = libraryResource(loc)
     writeFile file: './apim-data.json', text: wum_update_script
     config_file = readJSON file: 'apim-data.json'
     println("---------")
