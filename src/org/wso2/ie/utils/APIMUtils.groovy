@@ -32,6 +32,7 @@ APIMUtils(String product_key){
 
 def get_product_docker_home(wso2_product) {
     println "Getting product Docker Homes..."
+    def product_profile_docker_homes
     switch(wso2_product) {
         case "wso2am":
             product_profile_docker_homes = ["apim"]
