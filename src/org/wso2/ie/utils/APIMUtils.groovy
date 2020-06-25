@@ -23,8 +23,8 @@ def DOCKER_RESOURCES_GIT_RELEASE_TAG
 def latest_version
 
 class APIMUtils {
-    String product_key
- }
+
+String product_key
 
 def get_product_docker_home(wso2_product) {
     println "Getting product Docker Homes..."
@@ -142,4 +142,9 @@ def push_images(image_map) {
     .each { println it.object.push(it.param) }
 }
 
-return this
+
+}
+
+
+
+//return this
