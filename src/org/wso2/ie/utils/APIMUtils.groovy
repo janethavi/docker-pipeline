@@ -26,6 +26,10 @@ String product_key
 String DOCKER_RESOURCES_GIT_RELEASE_TAG
 String latest_version
 
+APIMUtils(String product_key){
+    this.product_key = product_key
+}
+
 def get_product_docker_home(wso2_product) {
     println "Getting product Docker Homes..."
     switch(wso2_product) {
