@@ -59,7 +59,7 @@ def get_docker_release_version(wso2_product, wso2_product_version) {
     // writeFile file: './apim-data.json', text: wum_update_script
     // config_file = readJSON file: 'apim-data.json'
     // println("---------")
-    def file = new File(getClass().getResource('resource/org/wso2/ie/conf/apim-data.json').toURI())
+    def file = new File(getClass().getResource('resource/org/wso2/ie/conf/apim-data.json'))
     writeFile file: './apim-data.json', text: wum_update_script
     println(this.product_key)
     def result = config_file.profiles.find{ it.product == wso2_product }?.versions?.find{ it.product_version == wso2_product_version }
