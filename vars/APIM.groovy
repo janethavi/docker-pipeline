@@ -69,7 +69,7 @@ def create_build_job(build_script, wso2_product, wso2_product_version, os_platfo
                 stage("Push ${os_platform_name}-${product_profile_docker_home}") {
                     build_script.push_images(image_map)
                     stage("Removing ${os_platform_name}-${product_profile_docker_home}") {
-                        def image_map.each{ image, tags ->
+                            image_map.each{ image, tags ->
                             tags.each{ tag ->
                                 ["docker", "rmi", "${image}:${tag}"].execute()
                             }
