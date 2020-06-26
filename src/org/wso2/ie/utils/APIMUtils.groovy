@@ -143,10 +143,8 @@ def tag_images(image, image_tags) {
 
 def push_images(image_map) {
     println "Pushing tagged images..."
-    docker.withRegistry( 'https://docker.wso2.com/', registryCredential ) {
-        image_map.collectMany { image, image_name -> image_name.collect { [object: image, param: it] } }
-        .each { println it.object.push(it.param) }
-    }
+    image_map.collectMany { image, image_name -> image_name.collect { [object: image, param: it] } }
+    .each { println it.object.push(it.param) }
 }
 
 
