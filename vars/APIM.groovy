@@ -68,11 +68,11 @@ def create_build_job(build_script, wso2_product, wso2_product_version, os_platfo
                 def image_map = build_script.image_build_handler(wso2_product, wso2_product_version, os_platform_name, os_platform_version, product_profile_docker_home, product_key)
                 stage("Push ${os_platform_name}-${product_profile_docker_home}") {
                     build_script.push_images(image_map)
-                }
-                stage("Removing ${os_platform_name}-${product_profile_docker_home}") {
-                    def image_map.each{ image, tags ->
-                        tags.each{ tag ->
-                            ["docker", "rmi", "${image}:${tag}"].execute()
+                    stage("Removing ${os_platform_name}-${product_profile_docker_home}") {
+                        def image_map.each{ image, tags ->
+                            tags.each{ tag ->
+                                ["docker", "rmi", "${image}:${tag}"].execute()
+                            }
                         }
                     }
                 }
