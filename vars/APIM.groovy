@@ -67,9 +67,7 @@ def create_build_job(build_script, wso2_product, wso2_product_version, os_platfo
             stage("Build ${os_platform_name}-${product_profile_docker_home}") {
                 def image_map = build_script.image_build_handler(wso2_product, wso2_product_version, os_platform_name, os_platform_version, product_profile_docker_home, product_key)
                 stage("Push ${os_platform_name}-${product_profile_docker_home}") {
-                    withCredentials([usernamePassword(credentialsId: 'docker-registry', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                        sh 'docker login docker.wso2.com -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                    }
+                    sh 'docker login docker.wso2.com -u $docker_username -p $docker_password'
                     build_script.push_images(image_map)
                     stage("Removing ${os_platform_name}-${product_profile_docker_home}") {
                             image_map.each{ image, tags ->
