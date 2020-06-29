@@ -19,7 +19,7 @@
 */
 import org.wso2.ie.utils.APIMUtils
 
-def SCRIPT_FILE_LOCATION = "org/wso2/ie/scripts"
+SCRIPT_FILE_LOCATION = "org/wso2/ie/scripts"
 
 def call(product_key) {
     def build_jobs = [:]
