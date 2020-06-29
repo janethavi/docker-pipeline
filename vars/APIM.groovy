@@ -19,9 +19,9 @@
 */
 import org.wso2.ie.utils.APIMUtils
 
-SCRIPT_FILE_LOCATION = "org/wso2/ie/scripts"
-
 def call(product_key) {
+    SCRIPT_FILE_LOCATION = "org/wso2/ie/scripts"
+
     def build_jobs = [:]
     pipeline {
         agent {
@@ -38,7 +38,7 @@ def call(product_key) {
                         sh 'wum init -u $WUM_USERNAME -p $WUM_PASSWORD'
                     }
                     script{
-                        wum_update_script = libraryResource "${SCRIPT_FILE_LOCATION}/wum-update.sh"
+                        wum_update_script = libraryResource '${SCRIPT_FILE_LOCATION}/wum-update.sh'
                         writeFile file: './wum-update.sh', text: wum_update_script
                         sh 'chmod +x ${WORKSPACE}/wum-update.sh'
                         sh '${WORKSPACE}/wum-update.sh $wso2_product $wso2_product_version'
