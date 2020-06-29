@@ -20,7 +20,7 @@
 import org.wso2.ie.utils.APIMUtils
 
 def call(product_key) {
-    SCRIPT_FILE_LOCATION = "org/wso2/ie/scripts"
+    def SCRIPT_FILE_LOCATION = "org/wso2/ie/scripts"
 
     def build_jobs = [:]
     pipeline {
