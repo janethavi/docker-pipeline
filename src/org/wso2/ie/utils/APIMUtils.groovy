@@ -146,7 +146,3 @@ def push_images(image_map) {
     image_map.collectMany { image, image_name -> image_name.collect { [object: image, param: it] } }
     .each { println it.object.push(it.param) }
 }
-
-
-
-//return this
