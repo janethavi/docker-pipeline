@@ -22,7 +22,7 @@ package org.wso2.ie.utils
 def DOCKER_RESOURCES_GIT_RELEASE_TAG
 def latest_version
 def DOCKER_RESOURCE_GIT_REPO_NAME
-def CONF_FILE_LOCATION = "org/wso2/ie/conf"
+CONF_FILE_LOCATION = "org/wso2/ie/conf"
 
 def get_product_docker_home(wso2_product) {
     println "Getting product Docker Homes..."
