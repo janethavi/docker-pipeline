@@ -22,7 +22,7 @@ package org.wso2.ie.utils
 def DOCKER_RESOURCES_GIT_RELEASE_TAG
 def latest_version
 def DOCKER_RESOURCE_GIT_REPO_NAME
-CONF_FILE_LOCATION = "org/wso2/ie/conf"
+def CONF_FILE_LOCATION
 
 def get_product_docker_home(wso2_product) {
     println "Getting product Docker Homes..."
@@ -56,6 +56,7 @@ def get_product_docker_home(wso2_product) {
 
 def get_docker_release_version(wso2_product, wso2_product_version, product_key) {
     println "Getting Docker Release Version..."
+    CONF_FILE_LOCATION = "org/wso2/ie/conf"
     wum_update_script = libraryResource "${CONF_FILE_LOCATION}/${product_key}-data.json"
     writeFile file: "./${product_key}-data.json", text: wum_update_script
     config_file = readJSON file: "${product_key}-data.json"
