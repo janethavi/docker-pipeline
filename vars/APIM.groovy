@@ -29,7 +29,7 @@ def call(product_key) {
         }
         environment {
             PATH = "/usr/local/wum/bin:$PATH"
-            EMAIL_TO = 'janeth@wso2.com'
+            EMAIL_TO = "$send_email_address"
         }
         stages {
             stage('Download_product_packs') {
@@ -65,6 +65,9 @@ def call(product_key) {
         }
         post {
             always {
+                emailext body: 'Check console output at $BUILD_URL to view the results. \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+                to: "${EMAIL_TO}",
+                subject: 'Build status in Docker Image Build Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
                 script{
                     cleanup_script = libraryResource "${SCRIPT_FILE_LOCATION}/cleanup.sh"
                     writeFile file: './cleanup.sh', text: cleanup_script
@@ -72,11 +75,12 @@ def call(product_key) {
                     sh '${WORKSPACE}/cleanup.sh $wso2_product $wso2_product_version'
                 }
             }
-            failure {
-                emailext body: 'Check console output at $BUILD_URL to view the results. \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
-                to: "${EMAIL_TO}",
-                subject: 'Build failed in Docker Image Build Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
-            }
+            // Uncomment the following block to activate failure email notification
+            // failure {
+            //     emailext body: 'Check console output at $BUILD_URL to view the results. \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+            //     to: "${EMAIL_TO}",
+            //     subject: 'Build failed in Docker Image Build Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
+            // }
         }
     }
 }
