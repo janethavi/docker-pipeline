@@ -1,0 +1,72 @@
+{
+    "profiles": [
+        {
+            "name": "wso2-obam",
+            "product": "wso2-obam",
+            "product_profile_docker_home": "obam",
+            "versions": [
+                {
+                    "product_version": "1.4.0",
+                    "docker_release_version": "1.4.0.7",
+                    "latest": false
+                },
+                {
+                    "product_version": "1.5.0",
+                    "docker_release_version": "1.5.0.1",
+                    "latest": true
+                }
+            ]
+        },
+        {
+            "name": "wso2-obbi-worker",
+            "product": "wso2-obbi",
+            "product_profile_docker_home": "obbi/worker",
+            "versions": [
+                {
+                    "product_version": "1.4.0",
+                    "docker_release_version": "1.4.0.7",
+                    "latest": false
+                },
+                {
+                    "product_version": "1.5.0",
+                    "docker_release_version": "1.5.0.1",
+                    "latest": true
+                }
+            ]
+        },
+        {
+            "name": "wso2-obbi-dashboard",
+            "product": "wso2-obbi",
+            "product_profile_docker_home": "obbi/dashboard",
+            "versions": [
+                {
+                    "product_version": "1.4.0",
+                    "docker_release_version": "1.4.0.7",
+                    "latest": false
+                },
+                {
+                    "product_version": "1.5.0",
+                    "docker_release_version": "1.5.0.1",
+                    "latest": true
+                }
+            ]
+        },
+        {
+            "name": "wso2-obkm",
+            "product": "wso2-obkm",
+            "product_profile_docker_home": "obkm",
+            "versions": [
+                {
+                    "product_version": "1.4.0",
+                    "docker_release_version": "1.4.0.7",
+                    "latest": false
+                },
+                {
+                    "product_version": "1.5.0",
+                    "docker_release_version": "1.5.0.1",
+                    "latest": true
+                }
+            ]
+        }
+    ]
+}
