@@ -67,7 +67,7 @@ def call(product_key) {
             always {
                 emailext body: 'Check console output at $BUILD_URL to view the results. \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
                 to: "${EMAIL_TO}",
-                subject: "Build ${status} in Docker Image Build Jenkins: $PROJECT_NAME - #$BUILD_NUMBER"
+                subject: "Build ${buildStatus} in Docker Image Build Jenkins: $PROJECT_NAME - #$BUILD_NUMBER"
                 script{
                     cleanup_script = libraryResource "${SCRIPT_FILE_LOCATION}/cleanup.sh"
                     writeFile file: './cleanup.sh', text: cleanup_script
