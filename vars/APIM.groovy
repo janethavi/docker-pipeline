@@ -67,7 +67,7 @@ def call(product_key) {
             always {
                 emailext body: "Check console output at ${BUILD_URL} to view the results. \n\n -------------------------------------------------- \n ------- Build Info ------- \n Product:- ${wso2_product} Version:- ${wso2_product_version} Build Status:- ${env.BUILD_STATUS}", 
                 to: "${EMAIL_TO}",
-                subject: "Build ${env.BUILD_STATUS} in Docker Image Build Jenkins: ${env.JOB_NAME} - #${env.BUILD_NUMBER}"
+                subject: "Build ${currentBuild.currentResult} in Docker Image Build Jenkins: ${env.JOB_NAME} - #${env.BUILD_NUMBER}"
                 script{
                     cleanup_script = libraryResource "${SCRIPT_FILE_LOCATION}/cleanup.sh"
                     writeFile file: './cleanup.sh', text: cleanup_script
