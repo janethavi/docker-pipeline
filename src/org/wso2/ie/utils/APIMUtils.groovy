@@ -55,6 +55,9 @@ def get_product_docker_home(wso2_product) {
         case "wso2-obbi":
             product_profile_docker_homes = ["obbi/worker", "obbi/dashboard"]
             break
+        case "wso2mi":
+            product_profile_docker_homes = ["micro-integrator"]
+            break
         default:
             println "Product is not valid"
             break

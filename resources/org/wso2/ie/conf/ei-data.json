@@ -96,6 +96,18 @@
                     "latest": true
                 }
             ]
+        },
+        {
+            "name": "wso2mi",
+            "product": "wso2mi",
+            "product_profile_docker_home": "micro-integrator",
+            "versions": [
+                {
+                    "product_version": "1.1.0",
+                    "docker_release_version": "7.0.0.2",
+                    "latest": true
+                  }
+            ]
         }
     ]
 }
