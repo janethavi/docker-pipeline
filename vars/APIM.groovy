@@ -52,7 +52,12 @@ def call(product_key) {
                         build_script = new APIMUtils()
                         product_profile_docker_homes = build_script.get_product_docker_home(wso2_product)
                         build_script.get_docker_release_version(wso2_product, wso2_product_version, product_key)
-                        os_platforms = [alpine: '3.10', ubuntu: '18.04', centos: '7']
+                        if (product_key == "open-banking"){
+                            os_platforms = [alpine: '3.10', ubuntu: '18.04']
+                        }
+                        else{
+                            os_platforms = [alpine: '3.10', ubuntu: '18.04', centos: '7']
+                        }
                         for (os_platform_name in  os_platforms.keySet()) {
                             for (product_profile_docker_home in product_profile_docker_homes) {
                                 build_jobs["${os_platform_name}-${product_profile_docker_home}"] = create_build_job(build_script, wso2_product, wso2_product_version, os_platform_name, os_platforms[os_platform_name], product_profile_docker_home, product_key)
@@ -65,7 +70,7 @@ def call(product_key) {
         }
         post {
             always {
-                emailext body: "Check console output at ${BUILD_URL} to view the results. \n\n -------------------------------------------------- \n ------- Build Info ------- \n Product:- ${wso2_product} \n Version:- ${wso2_product_version} \n Build Status:- ${currentBuild.currentResult}", 
+                emailext body: "Check console output at ${BUILD_URL} to view the results. \n\n ------- Build Info ------- \n Product:- ${wso2_product} \n Version:- ${wso2_product_version} \n Build Status:- ${currentBuild.currentResult}", 
                 to: "${EMAIL_TO}",
                 subject: "Build ${currentBuild.currentResult} in Docker Image Build Jenkins: ${env.JOB_NAME} - #${env.BUILD_NUMBER}"
                 script{
