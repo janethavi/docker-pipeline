@@ -65,7 +65,7 @@ def call(product_key) {
         }
         post {
             always {
-                emailext body: 'Check console output at $BUILD_URL to view the results. \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}', 
+                emailext body: "Check console output at ${BUILD_URL} to view the results. \n\n -------------------------------------------------- \n ------- Build Info ------- \n Product:- ${wso2_product} Version:- ${wso2_product_version} Build Status:- ${env.BUILD_STATUS}", 
                 to: "${EMAIL_TO}",
                 subject: "Build ${env.BUILD_STATUS} in Docker Image Build Jenkins: ${env.JOB_NAME} - #${env.BUILD_NUMBER}"
                 script{
